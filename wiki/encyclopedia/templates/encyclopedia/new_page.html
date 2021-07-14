@@ -1,0 +1,53 @@
+{% extends "encyclopedia/layout.html" %}
+{% block title %}
+    Encyclopedia - New Entry
+{% endblock %}
+
+{% block body %}
+    <h1 id="entry" style="text-align: center;">{{ heading }}</h1>
+
+        {% if new_page %}
+        <form action="{% url 'myapp:new_page' %}" method="POST">
+        {% else %}
+        
+        <form action="{% url 'myapp:edit' title=title %}" method="POST">
+        {% endif %}
+            {% csrf_token %}
+            <table style="width:100%;">
+                <tr>
+                    <td style="padding-top:2%">
+                        <span style="float: right; padding-right: 5%;"><b>{{ form.title.label }}:</b><span>
+                    </td>
+                    <td style="padding-top:2%">
+                        {{ form.title }}
+                    </td>
+                </tr>
+                <tr ><td></td>
+                    <td>
+                        {% if form_errors  %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ form_errors }}
+                            </div>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding-top:2%">
+                        <span style="float: right; padding-right: 5%;"><b>{{ form.textarea.label }}:</b><span>
+                    </td>
+                    <td style="padding-top:2%">
+                        {{ form.textarea }}
+                    </td>
+                </tr>
+                <tr><td></td>
+                    <td style="item-align: center;">
+                        <button type="submit" class="btn btn-secondary">Submit</button>
+                    </td>
+                </tr>
+            </table>
+            
+
+        </form>
+
+    
+{% endblock %}

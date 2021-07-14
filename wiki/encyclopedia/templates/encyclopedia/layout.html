@@ -1,0 +1,38 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="{% static 'encyclopedia/styles.css' %}" rel="stylesheet">
+    </head>
+    <body>
+        <div class="row">
+            <div class="sidebar col-lg-2 col-md-3">
+                <h2>Wiki</h2>
+                <form action="{% url 'myapp:search' %}" method="POST"> 
+                {% csrf_token %}
+                    <input class="search bar" type="text" name="q" placeholder="Search Encyclopedia">
+                </form>
+                <div class="button">
+                    <a href="{% url 'myapp:index' %}"><button type="button" class="btn btn-secondary">Home</button></a>
+                </div>
+                <div class="button">
+                    <a href="{% url 'myapp:new_page' %}"><button type="button" class="btn btn-secondary">Create New Page</button></a>
+                </div>
+                <div class="button">
+                    <a href="{% url 'myapp:random' %}"><button type="button" class="btn btn-secondary">Random Page</button></a>
+                </div>
+                {% block nav %}
+                {% endblock %}
+            </div>
+            <div class="main col-lg-10 col-md-9">
+                {% block body %}
+                {% endblock %}
+            </div>
+        </div>
+
+    </body>
+</html>

@@ -1,0 +1,20 @@
+{% extends "encyclopedia/layout.html" %}
+{% load markdownify %}
+
+{% block title %}
+    Encyclopedia - {{ title }}
+{% endblock %}
+
+{% block body %}
+    <!--<h1>{{ title }}</h1>-->
+
+    
+
+    {{ content | safe}}
+
+    <br />
+    <div>
+        <a href="{% url 'myapp:edit' title %}"><button style="item-align: center; margin-top:5%" type="button" class="btn btn-secondary">Edit Entry</button></a>
+        <a href="{% url 'myapp:remove' title %}"><button style="item-align: center; margin-top:5%" type="button" class="btn btn-secondary">Remove Entry</button></a>
+    </div>
+{% endblock %}
